@@ -1,14 +1,13 @@
-import 'package:employee_attendance/screens/register_screen.dart';
 import 'package:flutter/material.dart';
 
-class LoginScreen extends StatefulWidget {
-  const LoginScreen({super.key});
+class RegisterScreen extends StatefulWidget {
+  const RegisterScreen({super.key});
 
   @override
-  State<LoginScreen> createState() => _LoginScreenState();
+  State<RegisterScreen> createState() => _RegisterScreenState();
 }
 
-class _LoginScreenState extends State<LoginScreen> {
+class _RegisterScreenState extends State<RegisterScreen> {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
 
@@ -17,11 +16,15 @@ class _LoginScreenState extends State<LoginScreen> {
     double screenWidth = MediaQuery.of(context).size.width;
     double screenHeight = MediaQuery.of(context).size.height;
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.redAccent,
+        elevation: 0,
+      ),
         resizeToAvoidBottomInset: false,
         body: Column(
           children: [
             Container(
-              height: screenHeight / 3,
+              height: screenHeight / 4,
               width: screenWidth,
               decoration: const BoxDecoration(
                   color: Colors.redAccent,
@@ -53,51 +56,39 @@ class _LoginScreenState extends State<LoginScreen> {
                   children: [
                     TextField(
                       decoration: const InputDecoration(
-                          label: Text("Employee Email ID"),
-                          prefixIcon: Icon(Icons.person),
-                          border: OutlineInputBorder()),
+                        label: Text("Employee Email ID"),
+                        prefixIcon: Icon(Icons.person),
+                        border: OutlineInputBorder()
+                      ),
                       controller: _emailController,
                     ),
-                    const SizedBox(height: 20),
+                    const SizedBox(
+                      height: 20
+                    ),
                     TextField(
                       decoration: const InputDecoration(
-                          label: Text("Employee Password"),
-                          prefixIcon: Icon(Icons.lock),
-                          border: OutlineInputBorder()),
+                        label: Text("Employee Password"),
+                        prefixIcon: Icon(Icons.lock),
+                        border: OutlineInputBorder()
+                      ),
                       controller: _passwordController,
                       obscureText: true,
                     ),
-                    const SizedBox(height: 30),
-                    SizedBox(
-                        height: 60,
-                        width: double.infinity,
-                        child: ElevatedButton(
-                          onPressed: () {},
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor: Colors.redAccent,
-                            shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(30)),
-                          ),
-                          child: const Text(
-                            "LOGIN",
-                            style: TextStyle(fontSize: 20),
-                          ),
-                        )),
                     const SizedBox(
-                      height: 20,
+                      height: 30
                     ),
-                    TextButton(
-                        onPressed: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) =>
-                                      const RegisterScreen()));
-                        },
-                        child: const Text(
-                          "Don't have an account? Register here",
-                          style: TextStyle(color: Colors.redAccent),
-                        ))
+                    SizedBox(
+                      height: 60,
+                      width: double.infinity,
+                      child: ElevatedButton(onPressed: (){
+
+                      },style: ElevatedButton.styleFrom(
+                        backgroundColor: Colors.redAccent,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(30)
+                        ),
+                      ), child: const Text("REGISTER", style: TextStyle(fontSize: 20),),)
+                    )
                   ],
                 )),
           ],
