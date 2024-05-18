@@ -32,4 +32,28 @@ class AuthService extends ChangeNotifier {
       Utils.showSnackBar(e.toString(), context, color: Colors.red);
     }
   }
+
+  Future loginEmployee(
+      String email, String password, BuildContext context) async {
+    try {
+      setIsLoading = true;
+      if (email == "" || password == "") {
+        throw ("All fields are required");
+      }
+
+      final AuthResponse response = await _supabaseClient.auth
+          .signInWithPassword(email: email, password: password);
+      setIsLoading = false;
+    } catch (e) {
+      setIsLoading = false;
+      Utils.showSnackBar(e.toString(), context, color: Colors.red);
+    }
+  }
+
+  Future signOut() async {
+    await _supabaseClient.auth.signOut();
+    notifyListeners();
+  }
+
+  User? get currentUser => _supabaseClient.auth.currentUser;
 }
