@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:slide_to_act/slide_to_act.dart';
 
 class AttendanceScreen extends StatefulWidget {
   const AttendanceScreen({super.key});
@@ -8,11 +9,148 @@ class AttendanceScreen extends StatefulWidget {
 }
 
 class _AttendanceScreenState extends State<AttendanceScreen> {
+  final GlobalKey<SlideActionState> key = GlobalKey<SlideActionState>();
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      body: Center(
-        child: Text("Today Attendance"),
-      ),);
+    return Scaffold(
+      body: SingleChildScrollView(
+        padding: const EdgeInsets.all(20),
+        child: Column(
+          children: [
+            Container(
+            alignment: Alignment.centerLeft,
+            margin: const EdgeInsets.only(top: 20),
+            child: const Text(
+              "Welcome",
+              style: TextStyle(
+                fontSize: 24,
+                fontWeight: FontWeight.bold,
+                color: Colors.black54,
+              ),
+            ),
+          ),
+            Container(
+              alignment: Alignment.centerLeft,
+              child: const Text(
+                "John Doe",
+                style: TextStyle(
+                  fontSize: 24,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.black,
+                ),
+              ),
+            ),
+            Container(
+              alignment: Alignment.centerLeft,
+              margin: const EdgeInsets.only(top: 32),
+              child: const Text(
+                "Today's Status",
+                style: TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.black,
+                ),
+              ),
+            ),
+            Container(
+              margin: const EdgeInsets.only(top: 20, bottom: 32),
+              height: 150,
+              decoration: const BoxDecoration(
+                color: Colors.white,
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.black26,
+                    blurRadius: 10,
+                    spreadRadius: 5,
+                    offset: Offset(2, 2),
+                  ),
+                ],
+                borderRadius: BorderRadius.all(Radius.circular(20)),
+              ),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Expanded(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        const Text("Check In",
+                          style: TextStyle(
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.black54,
+                          ),
+                        ),
+                        SizedBox(width: 80, child: Divider(),),
+                        const Text("08:00 AM",
+                          style: TextStyle(
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.black54,
+                          ),
+                        ),
+    ],
+              )),
+                  Expanded(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          const Text("Check Out",
+                            style: TextStyle(
+                              fontSize: 20,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.black54,
+                            ),
+                          ),
+                          SizedBox(width: 80, child: Divider(),),
+                          const Text("--:-- AM",
+                            style: TextStyle(
+                              fontSize: 20,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.black54,
+                            ),
+                          ),
+                        ],
+                      )),
+                ],
+
+              ),
+            ),
+
+            Container(
+              alignment: Alignment.centerLeft,
+              child: Text("05 May 2024", style: TextStyle(fontSize: 20),),
+            ),
+            Container(
+              alignment: Alignment.centerLeft,
+              child: Text("20:00:01", style: TextStyle(fontSize: 15, color: Colors.black54)),
+            ),
+
+            Container(
+              margin: const EdgeInsets.only(top: 25),
+              child: Builder(builder: (context){
+                return SlideAction(
+                  text: "Slide to Check Out",
+                  textStyle: TextStyle(
+                    color: Colors.black54,
+                    fontSize: 18,
+                  ),
+                  outerColor: Colors.white,
+                  innerColor: Colors.redAccent,
+                  key: key,
+                  onSubmit: (){
+                    key.currentState!.reset();
+                  }
+                );
+              }),
+            )
+          ],
+        )
+
+      )
+    );
   }
 }
