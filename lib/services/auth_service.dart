@@ -15,30 +15,30 @@ class AuthService extends ChangeNotifier {
     notifyListeners();
   }
 
-  Future registerEmployee(
-      String email, String password, BuildContext context) async {
-    try {
-      setIsLoading = true;
-      if (email == "" || password == "") {
-        throw ("All fields are required");
-      }
-
-      final AuthResponse response =
-          await _supabaseClient.auth.signUp(email: email, password: password);
-      if (response != null) {
-        await _dbService.insertNewUser(email, response.user!.id);
-
-        Utils.showSnackBar("Successfully registered.", context,
-            color: Colors.green);
-
-        await loginEmployee(email, password, context);
-        Navigator.pop(context);
-      }
-    } catch (e) {
-      setIsLoading = false;
-      Utils.showSnackBar(e.toString(), context, color: Colors.red);
+  Future registerEmployee(String email, String password, BuildContext context) async {
+  setIsLoading = true;
+  try {
+    if (email.isEmpty || password.isEmpty) {
+      throw Exception("All fields are required");
     }
+
+    final AuthResponse response = await _supabaseClient.auth.signUp(email: email, password: password);
+    if (response.user != null) {
+      await _dbService.insertNewUser(email, response.user!.id);
+
+      Utils.showSnackBar("Successfully registered.", context, color: Colors.green);
+
+      await loginEmployee(email, password, context);
+      Navigator.pop(context);
+    } else {
+      throw Exception("Failed to register user.");
+    }
+  } catch (e) {
+    Utils.showSnackBar(e.toString(), context, color: Colors.red);
+  } finally {
+    setIsLoading = false;
   }
+}
 
   Future loginEmployee(
       String email, String password, BuildContext context) async {
