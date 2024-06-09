@@ -21,7 +21,7 @@ class AttendanceService extends ChangeNotifier {
 
   String _attendanceHistoryMonth = DateFormat("MMMM yyyy").format(DateTime.now());
   String get attendanceHistoryMonth => _attendanceHistoryMonth;
-  set setAttendanceHistoryMonth(String value) {
+  set attendanceHistoryMonth(String value) {
     _attendanceHistoryMonth = value;
     notifyListeners();
   }
